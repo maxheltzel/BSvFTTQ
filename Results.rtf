@@ -1,0 +1,137 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Bold;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}}{\leveltext\leveltemplateid201\'01\'00;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{circle\}}{\leveltext\leveltemplateid202\'01\uc0\u9702 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f0\b\fs28 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Interpretation of Results\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 The option pricing comparison reveals significant discrepancies between the FFT-Based, Quadrature-Based, and Combined methods when benchmarked against the Black-Scholes analytical solution. Below is a detailed analysis of the observed outcomes:\
+\pard\pardeftab720\sa319\partightenfactor0
+
+\f0\b \cf0 Option Prices:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls1\ilvl0\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 FFT-Based Price:
+\f1\b0 \uc0\u8232 The FFT-Based method yielded a price of 
+\f0\b -0.0000
+\f1\b0 , which is not only substantially different from the Black-Scholes price of 
+\f0\b 10.4506
+\f1\b0  but also implausibly negative. This indicates a fundamental flaw in the FFT implementation, as option prices cannot be negative. Such a result suggests potential issues with the characteristic function, damping factors, or the interpolation step within the FFT algorithm.\
+\ls1\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Quadrature-Based Price:
+\f1\b0 \uc0\u8232 The Quadrature-Based method produced a price of 
+\f0\b 16.0869
+\f1\b0 , which is 
+\f0\b 53.93% higher
+\f1\b0  than the Black-Scholes benchmark. While this method aims to perform numerical integration to approximate the option price, the significant overestimation implies inaccuracies in the integrand formulation or the integration limits. It may also reflect insufficient handling of the tails in the numerical integration process.\
+\ls1\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Combined FFT & Quadrature Price:
+\f1\b0 \uc0\u8232 By averaging the FFT and Quadrature results, the Combined method arrived at a price of 
+\f0\b 8.0435
+\f1\b0 . Although this is closer to the Black-Scholes price compared to the individual methods, it still underestimates the true value by 
+\f0\b 23.03%
+\f1\b0 . This reduction in error highlights that combining the two approaches can mitigate some inaccuracies inherent in each method. However, the remaining discrepancy underscores the necessity for further refinement and calibration of the combined model to achieve higher precision.\
+\pard\pardeftab720\sa319\partightenfactor0
+
+\f0\b \cf0 Accuracy Metrics:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls2\ilvl0\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 FFT Error: 100.00%
+\f1\b0 \uc0\u8232 The FFT-Based method exhibits a 
+\f0\b 100% error
+\f1\b0 , effectively doubling the discrepancy from the Black-Scholes price. This extreme error rate invalidates the FFT approach in its current form, necessitating a thorough review of the implementation parameters and mathematical formulations to identify and rectify the sources of inaccuracy.\
+\ls2\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Quadrature Error: 53.93%
+\f1\b0 \uc0\u8232 The Quadrature-Based method's 
+\f0\b 53.93% error
+\f1\b0  signifies a substantial overestimation relative to the Black-Scholes benchmark. While numerical quadrature methods are generally reliable for option pricing, the high error rate in this instance suggests potential issues such as inappropriate choice of integration variables, insufficient integration precision, or incorrect application of boundary conditions.\
+\ls2\ilvl0
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Combined Method Error: 23.03%
+\f1\b0 \uc0\u8232 The Combined FFT & Quadrature method achieves a 
+\f0\b 23.03% error
+\f1\b0 , which, while significantly better than the individual methods, still represents a notable deviation from the expected value. This improvement indicates that averaging the two methods can partially compensate for their respective shortcomings. Nonetheless, a 
+\f0\b 23.03% error
+\f1\b0  remains too high for practical applications, highlighting the need for further optimization and validation against analytical or market data.\
+\pard\pardeftab720\sa319\partightenfactor0
+
+\f0\b \cf0 Implications and Recommendations:\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0 \cf0 The current results demonstrate that both the FFT-Based and Quadrature-Based methods, in their present implementations, fall short of accurately replicating the Black-Scholes option pricing. The Combined method offers a marginal improvement but still fails to achieve the desired level of precision. These outcomes emphasize several critical points:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls3\ilvl0
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Implementation Accuracy:
+\f1\b0 \
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sa240\partightenfactor0
+\ls3\ilvl1
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u9702 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 FFT-Based Method:
+\f1\b0  The negative price output suggests possible errors in the characteristic function formulation, damping factors, or FFT parameter settings. It's essential to verify the mathematical accuracy and numerical stability of the FFT implementation.\
+\ls3\ilvl1
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u9702 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Quadrature-Based Method:
+\f1\b0  The overestimation indicates potential issues with the integrand definition or the numerical integration process. Ensuring proper handling of the integration limits and the behavior of the integrand across the domain is crucial.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls3\ilvl0
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Methodological Refinement:
+\f1\b0 \
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sa240\partightenfactor0
+\ls3\ilvl1
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u9702 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Parameter Calibration:
+\f1\b0  Adjusting parameters such as the damping factor (alpha) in the FFT method or increasing the precision and range of integration in the Quadrature method may enhance accuracy.\
+\ls3\ilvl1
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u9702 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Error Handling:
+\f1\b0  Implementing robust error-checking mechanisms can help identify and correct anomalies in the pricing outputs, such as negative option prices.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls3\ilvl0
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	3	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Model Validation:
+\f1\b0 \
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sa240\partightenfactor0
+\ls3\ilvl1
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u9702 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Benchmarking:
+\f1\b0  Comparing the implemented methods against additional analytical solutions or high-precision numerical methods can provide deeper insights into their performance and areas needing improvement.\
+\ls3\ilvl1
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u9702 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Sensitivity Analysis:
+\f1\b0  Conducting sensitivity analyses on key inputs (e.g., volatility, interest rates) can help understand how variations affect the pricing accuracy and identify the stability of each method.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls3\ilvl0
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	4	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Advanced Techniques:
+\f1\b0 \
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sa240\partightenfactor0
+\ls3\ilvl1
+\f0\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u9702 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Hybrid Approaches:
+\f1\b0  Exploring more sophisticated combination strategies beyond simple averaging, such as weighted averages based on confidence levels or machine learning-based corrections, may yield better accuracy.\
+\ls3\ilvl1
+\f0\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u9702 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Alternative Models:
+\f1\b0  Investigating other option pricing models that relax some of Black-Scholes' restrictive assumptions, such as stochastic volatility models or jump-diffusion models, could provide more accurate pricing in complex market conditions.\
+\pard\pardeftab720\sa319\partightenfactor0
+
+\f0\b \cf0 Conclusion\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0 \cf0 The comparative analysis underscores significant limitations in the current implementations of FFT-Based and Quadrature-Based option pricing methods when benchmarked against the Black-Scholes model. While the Combined method shows promise in reducing errors, the substantial remaining discrepancy highlights the need for further refinement and validation. Accurate option pricing remains a critical component of financial decision-making, and achieving high precision requires meticulous implementation, rigorous testing, and continuous model improvement.\
+To advance the reliability of these alternative pricing methods, it is imperative to address the identified inaccuracies through detailed code review, parameter optimization, and comprehensive validation against both analytical benchmarks and real-market data. Only then can these methods potentially serve as robust alternatives or complements to the traditional Black-Scholes framework.\
+}
